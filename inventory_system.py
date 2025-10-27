@@ -6,6 +6,7 @@ from datetime import datetime
 # Global variable
 stock_data = {}
 
+
 def add_item(item="default", qty=0, logs=None):
     """Add quantity to an item in stock."""
     if not item:
@@ -34,7 +35,7 @@ def get_qty(item):
 def load_data(file="inventory.json"):
     """Load stock data from JSON file."""
     with open(file, "r", encoding="utf-8") as f:
-        global stock_data
+        global stock_data  # pylint: disable=global-statement
         stock_data = json.loads(f.read())
 
 
@@ -75,3 +76,5 @@ def main():
     # eval removed for security
 
 main()
+
+
