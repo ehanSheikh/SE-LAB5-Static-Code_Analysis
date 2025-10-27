@@ -9,7 +9,7 @@ stock_data = {}
 
 def add_item(item="default", qty=0, logs=None):
     """Add quantity to an item in stock."""
-    if not item:
+    if not item or not isinstance(qty, int):
         return
     if logs is None:
         logs = []
