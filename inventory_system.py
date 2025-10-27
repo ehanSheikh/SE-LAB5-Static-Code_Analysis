@@ -14,6 +14,7 @@ def addItem(item="default", qty=0, logs=None):
     stock_data[item] = stock_data.get(item, 0) + qty
     logs.append(f"{datetime.now()}: Added {qty} of {item}")
 
+
 def removeItem(item, qty):
     try:
         stock_data[item] -= qty
@@ -22,22 +23,27 @@ def removeItem(item, qty):
     except KeyError:
         pass
 
+
 def getQty(item):
     return stock_data[item]
+
 
 def loadData(file="inventory.json"):
     with open(file, "r", encoding="utf-8") as f:
         global stock_data
         stock_data = json.loads(f.read())
 
+
 def saveData(file="inventory.json"):
     with open(file, "w", encoding="utf-8") as f:
         f.write(json.dumps(stock_data))
+
 
 def printData():
     print("Items Report")
     for i in stock_data:
         print(i, "->", stock_data[i])
+
 
 def checkLowItems(threshold=5):
     result = []
@@ -45,6 +51,7 @@ def checkLowItems(threshold=5):
         if stock_data[i] < threshold:
             result.append(i)
     return result
+
 
 def main():
     addItem("apple", 10)
