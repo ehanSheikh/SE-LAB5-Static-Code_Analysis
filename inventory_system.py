@@ -7,6 +7,7 @@ from datetime import datetime
 stock_data = {}
 
 def addItem(item="default", qty=0, logs=None):
+    """Add quantity to an item in stock."""
     if not item:
         return
     if logs is None:
@@ -16,6 +17,7 @@ def addItem(item="default", qty=0, logs=None):
 
 
 def removeItem(item, qty):
+    """Remove quantity from an item in stock."""
     try:
         stock_data[item] -= qty
         if stock_data[item] <= 0:
@@ -25,27 +27,32 @@ def removeItem(item, qty):
 
 
 def getQty(item):
+    """Get quantity of an item in stock."""
     return stock_data[item]
 
 
 def loadData(file="inventory.json"):
+    """Load stock data from JSON file."""
     with open(file, "r", encoding="utf-8") as f:
         global stock_data
         stock_data = json.loads(f.read())
 
 
 def saveData(file="inventory.json"):
+    """Save stock data to JSON file."""
     with open(file, "w", encoding="utf-8") as f:
         f.write(json.dumps(stock_data))
 
 
 def printData():
+    """Print the current stock data."""
     print("Items Report")
     for i in stock_data:
         print(i, "->", stock_data[i])
 
 
 def checkLowItems(threshold=5):
+    """Check items with quantity below threshold."""
     result = []
     for i in stock_data:
         if stock_data[i] < threshold:
@@ -54,6 +61,7 @@ def checkLowItems(threshold=5):
 
 
 def main():
+    """Main function to demonstrate inventory operations."""
     addItem("apple", 10)
     addItem("banana", -2)
     addItem(123, "ten")  # invalid types, no check
